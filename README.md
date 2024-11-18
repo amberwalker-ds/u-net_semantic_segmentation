@@ -29,7 +29,7 @@ The model was trained using a batch size of 8 and 50 epochs, with early stopping
 
 ## Results
 Evaluating the model on the test set, I achieved the following metrics:
-Accuracy: 94.7% (Overall correctness of predictions)
-Precision: 75.2% (Percentage of predicted buildings that were actual buildings)
-Recall: 78.9% (Percentage of actual buildings correctly identified by the model)
-Dice Metric: 76.7% (Measures the overlap between predicted and ground truth masks)
+- Accuracy: 94.7% (Overall correctness of predictions)
+- Precision: 75.2% (Percentage of predicted buildings that were actual buildings)
+- Recall: 78.9% (Percentage of actual buildings correctly identified by the model)
+- Dice Metric: 76.7% (Measures the overlap between predicted and ground truth masks)
