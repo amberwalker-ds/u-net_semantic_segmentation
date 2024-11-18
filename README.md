@@ -24,36 +24,12 @@ The dataset is imbalanced, with negative pixels outweighing positive pixels, as 
 ## Simplified U-Net Model
 Using the Keras functional API, a simplified U-Net model was defined and trained. Hyperparameters were optimized using Keras Tuner.
 
-### Hyperparameter Search
-- **Activation Functions:** ReLU, Tanh, Sigmoid, Leaky ReLU
-- **Kernel Initializers:** Glorot Uniform, He Normal, LeCun Normal
-- **Optimizers:** Adam, SGD, RMSprop
-- **Learning Rate**
-
-### Optimal Hyperparameters:
-- **Activation Function:** Leaky ReLU
-- **Alpha for Leaky ReLU:** 0.21
-- **Kernel Initializer:** He Normal
-- **Learning Rate:** 0.0011
-- **Optimizer:** Adam
-
 ## Training
-The model was trained using a batch size of 32 and 20 epochs, with early stopping to minimize validation error.
+The model was trained using a batch size of 8 and 50 epochs, with early stopping to minimize validation error.
 
-## Performance Comparison
-Different techniques (batch normalization, spatial dropout, data augmentation) were applied to improve model performance.
-
-### Batch Normalization
-Normalized the input of each layer to stabilize and accelerate training.
-
-### Spatial Dropout
-Randomly dropped entire feature maps to prevent overfitting.
-
-### Data Augmentation
-Applied transformations to increase the diversity of training data.
-
-## Conclusion
-- Best for Reducing False Negatives: Simplified U-net model with optimal threshold (76.94% recall)
-- Best for Reducing False Positives: Simplified U-net model with 0.5 threshold (76.85% precision)
-- Overall Balance: Simplified U-net model with optimal threshold offers a better balance between precision and recall.
-
+## Results
+Evaluating the model on the test set, I achieved the following metrics:
+Accuracy: 94.7% (Overall correctness of predictions)
+Precision: 75.2% (Percentage of predicted buildings that were actual buildings)
+Recall: 78.9% (Percentage of actual buildings correctly identified by the model)
+Dice Metric: 76.7% (Measures the overlap between predicted and ground truth masks)
