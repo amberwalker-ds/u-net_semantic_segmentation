@@ -1,35 +1,81 @@
-# Semantic Segmentation of Building Footprints Using U-Net
+# Building Footprint Segmentation with U-Net
 
-## Introduction
-This project involves performing semantic segmentation to extract building footprints from aerial images. The goal is to create a model capable of predicting whether each pixel in an image belongs to a building or not, using a U-Net convolutional neural network architecture.
+This project implements a U-Net convolutional neural network to identify and map building footprints from aerial images. The model was trained on high-resolution aerial imagery and achieves a **94.7% accuracy** and a **76.7% Dice score**, making it suitable for tasks like urban planning and disaster management.
 
-## U-Net Model
-U-Net is a type of convolutional neural network (CNN) designed specifically for image segmentation tasks. It has a symmetric architecture with an encoder (contracting path) and a decoder (expanding path), forming a U-shaped structure.
+If you would like to a clear and easy-to-understand tutorial, follow along with my Medium article: https://medium.com/ai-advances/how-i-used-a-u-net-to-map-building-footprints-from-the-sky-bf6d184c41d8
 
-- **Encoder:** Multiple convolutional layers followed by max-pooling layers, which reduce spatial dimensions and help capture general patterns.
-- **Decoder:** Upsampling layers that increase spatial dimensions, followed by convolutional layers to refine features and produce a detailed segmentation map.
-- **Skip Connections:** Link corresponding layers in the encoder and decoder, providing high-resolution features from the encoder to the decoder.
+## Data Sources
+The dataset used in this project contains 3,347 images (256×256×3) of Massachusetts, sourced from OpenStreetMap building footprints. Each image is paired with a binary mask indicating the location of buildings. You can find the raw dataset [here](https://www.cs.toronto.edu/~vmnih/data/).
 
-## Data Preparation
-The dataset consists of 3347 color raster images (256x256x3 pixels), each representing an area of 300 square meters in Massachusetts. Corresponding to each image is a binary mask indicating building footprints derived from OpenStreetMap data.
+---
 
-### Steps:
-1. **Normalization:** Pixel values are normalized to the range [0, 1] by dividing by 255.
-2. **Dimension Check:** Ensured correspondence between images and labels by checking dimensions.
-3. **Visualization:** Displayed several matching image and label pairs.
+## Installation Instructions
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/amberwalker-ds/u-net_semantic_segmentation
+    cd your-repo-name
+    ```
 
-## Class Distribution
-The dataset is imbalanced, with negative pixels outweighing positive pixels, as non-building areas make up more space than buildings.
+2. **Install Dependencies**:
+    Ensure you have Python 3.8+ and the required packages installed:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-## Simplified U-Net Model
-Using the Keras functional API, a simplified U-Net model was defined and trained. Hyperparameters were optimized using Keras Tuner.
+3. **Hardware Requirements**:
+    - **1 GPU is required** to train and evaluate the U-Net model efficiently.
+    - If no GPU is available, use a cloud-based solution like Google Colab or AWS.
 
-## Training
-The model was trained using a batch size of 8 and 50 epochs, with early stopping to minimize validation error.
+---
 
-## Results
-Evaluating the model on the test set, I achieved the following metrics:
-- Accuracy: 94.7% (Overall correctness of predictions)
-- Precision: 75.2% (Percentage of predicted buildings that were actual buildings)
-- Recall: 78.9% (Percentage of actual buildings correctly identified by the model)
-- Dice Metric: 76.7% (Measures the overlap between predicted and ground truth masks)
+## Project Structure
+.
+project/
+├── data/
+│   ├── test/
+│   │   ├── images/         # Test images for evaluation
+│   │   ├── labels/         # Corresponding labels (ground truth masks) for test images
+│   ├── training/
+│   │   ├── images/         # Training images used for model training
+│   │   ├── labels/         # Corresponding labels (ground truth masks) for training images
+│   ├── validation/
+│   │   ├── images/         # Validation images for model tuning
+│   │   ├── labels/         # Corresponding labels (ground truth masks) for validation images
+│   ├── utilities/
+│   │   └── tiles.gpkg      # Geopackage file with additional utility data
+├── scripts/                # Python scripts for preprocessing, training, and evaluation
+│    └── segmentation_utilities.py  # Helper functions for segmentation tasks
+├── notebooks/              # Jupyter notebooks for exploration and prototyping
+│   ├── segmentation_practice_amber_walker.ipynb #walkthrough EDA & Model Training
+├── README.md               # Project overview and instructions
+├── requirements.txt        # List of Python dependencies
+└── LICENSE                 # License for the project
+
+
+---
+
+## Results and Analysis
+- **Metrics**:
+    - **Accuracy**: 94.7%
+    - **Precision**: 75.2%
+    - **Recall**: 78.9%
+    - **Dice Score**: 76.7%
+
+---
+
+## Limitations and Future Work
+### Limitations
+1. The model struggles with small buildings or areas with heavy shadows.
+2. Limited generalization to aerial images from different regions due to dataset-specific biases.
+3. Requires a **GPU** for efficient training and prediction.
+
+### Future Work
+1. **Data Augmentation**:
+    Introduce more variations (e.g., rotations, brightness adjustments) to improve the model's robustness.
+2. **Improved Post-Processing**:
+    Refine the predicted masks using morphological operations to reduce false positives and false negatives.
+3. **Deployment**:
+    Develop a web-based tool with an interactive slider to allow users to upload aerial images and view segmentation results.
+---
+
+If you have any questions or feedback, feel free to open an issue or reach out!

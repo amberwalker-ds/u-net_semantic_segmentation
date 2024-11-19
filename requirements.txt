@@ -1,0 +1,7 @@
+tensorflow>=2.6.0
+numpy
+pillow
+matplotlib
+tifffile
+scikit-learn
+tqdm
