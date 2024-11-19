@@ -29,6 +29,7 @@ The dataset used in this project contains 3,347 images (256×256×3) of Massachu
 ---
 
 ## Project Structure
+```
 .
 project/
 ├── data/
@@ -51,7 +52,7 @@ project/
 ├── requirements.txt        # List of Python dependencies
 └── LICENSE                 # License for the project
 
-
+```
 ---
 
 ## Results and Analysis
